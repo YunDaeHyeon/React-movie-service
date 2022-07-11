@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div id="root"></div>
+</body>
+    <!-- React 사용을 위한 import -->
+    <script src="https://unpkg.com/react@17.02/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script>
+        // 암기 X 이해 O
+        // 잘 사용하지 않는 ReactJS에서 Element를 만드는 방법
+        // createElement는 HTMl에 Element을 생성하는 함수
+        const root = document.getElementById("root");
+        const span = React.createElement("span"); // HTML의 태그 이름과 동일해야 한다.
+        // 생성한 Element를 HTML에 적용하기 위해 react-dom 사용
+        // render()의 첫 번째 요소는 HTML에 적용하고자 하는 오브젝트, 두 번째 요소는 올리고자 하는 위치의 오브젝트
+        ReactDOM.render(span, root); // root 안에 span을 넣어라.
+    </script>
+</html>

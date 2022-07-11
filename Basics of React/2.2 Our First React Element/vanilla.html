@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <span>Total Clicks : 0</span>
+    <button id="btn">Click me</button> 
+    <script>
+        let counter = 0;
+        const button = document.getElementById("btn");
+        const span = document.querySelector("span");
+        function onClick(){
+            counter++;
+            span.innerText = `Total Clicks : ${counter}`;
+        }
+        button.addEventListener("click",onClick);
+        /*
+            !! HTML 에서의 Interactivity(상호작용) 만들기 !!
+            1. HTML 만들기
+            2. JS에서 button 가져오기
+            3. button.addEventListener 설정하고 click event 감지하기
+            4. counter 1씩 증가시켜 span의 text 반영하기 (HTML 업데이트)
+        */
+    </script>
+</body>
+</html>
