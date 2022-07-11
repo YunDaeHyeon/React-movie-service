@@ -1,2 +1,3 @@
 # React-Study
-리액트 학습을 위한 Repository
+**Nomadcoder의 ReactJS로 영화 웹 서비스 만들기**
+ - 시작 : 22.07.11
