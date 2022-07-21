@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div id="root"></div>
+</body>
+    <!-- React 사용을 위한 import -->
+    <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <!-- Babel 사용을 위한 import -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Babel 사용을 위한 Type 지정 -->
+
+    <script type="text/babel">
+        const root = document.getElementById("root");
+        // JSX에 변수를 전달하는 방법 = JSX 코드상 중괄호를 사용하면 끝. {}
+        function App(){
+            // State를 사용하기 위해 data라는 변수에 userState() 할당
+            // useState()는 초기값을 설정할 수 있다.
+            // useState()는 2개의 요소를 가지고 있는 배열이다.
+            // useState()의 첫 번째 요소는 데이터를 의미한다.
+            // useState()의 두 번째 요소는 데이터를 바꾸는 함수를 의미한다.
+            const [counter, setCounter] = React.useState(0);
+            const onClick = () => {
+                setCounter(counter + 1); // useState의 두 번째 요소, setCounter는 첫 번째 요소의 값이 변경될 경우 리렌더링을 일으킨다.
+            };
+            return(
+            <div>
+                <h3>Total Clicks : {counter}</h3>
+                <button onClick={onClick}>Click me</button>
+            </div>
+            );
+        }
+        ReactDOM.render(<App/>, root);
+        /*
+            컴포넌트에 변경된 사항이 존재할 시, 리렌더링을 유발시키기 위해
+            State를 사용한다.
+            유동적으로 변경될 수 있는 데이터는 변수가 아닌, State에 저장한다.
+
+            JS에서 배열에 존재하는 각 요소에게 이름을 부여하는 방법은?
+            만약, food라는 배열에 tomato와 potato라는 요소가 있고,
+            이를 변수로 바꾸기 위해서는 아래와 같은 과정을 거쳐야한다.
+            const food = ["tomato", "potato"];
+            const myFirstFood = food[0];
+            const mySecondFood = food[1];
+            이를 아주 쉽게 바꿀 수 있다.
+            
+            const food = ["tomato", "potato"];
+            const [myFirstFood, mySecondFood] = food;
+            위와 같이 역배열을 선언한다.
+            console.log(myFirstFood);
+            => "tomato"
+
+            위와 같은 기법을 배열 구조 분해 할당, Java script Destructuring assignment라 한다.
+        */
+    </script>
+</html>
