@@ -20,11 +20,14 @@
             // useState()는 2개의 요소를 가지고 있는 배열이다.
             // useState()의 첫 번째 요소는 데이터를 의미한다.
             // useState()의 두 번째 요소는 데이터를 바꾸는 함수를 의미한다.
-            const [counter, modifier] = React.useState(100);
+            const [counter, modifier] = React.useState(0);
+            const onClick = () => {
+                modifier(counter + 1); // useState의 두 번째 요소, modifier는 첫 번째 요소의 값이 변경될 경우 리렌더링을 일으킨다.
+            };
             return(
             <div>
                 <h3>Total Clicks : {counter}</h3>
-                <button>Click me</button>
+                <button onClick={onClick}>Click me</button>
             </div>
             );
         }
