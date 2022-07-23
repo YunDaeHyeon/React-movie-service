@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div id="root"></div>
+</body>
+    <!-- React 사용을 위한 import -->
+    <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <!-- Babel 사용을 위한 import -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Babel 사용을 위한 Type 지정 -->
+
+    <!-- 시간 <-> 분 변환기 -->
+    <script type="text/babel">
+        const root = document.getElementById("root");
+        function App(){
+            const [amount, setAmount] = React.useState(0);
+            const [inverted, setInverted] = React.useState(false);
+            const onReset = () => setAmount(0); // 리셋
+            // 시간에서 분, 분에서 시간 체인지
+            // 버튼 클릭 했을 때 inverted가 true라면 false로, false라면 true로 (부정명제 활용)
+            const onInverted = () => {
+                onReset(); // Flip 버튼 클릭했을 때 onReset도 호출
+                setInverted((current) => !current); // 직접 설정이 아닌 함수를 사용해서 안정성 향상
+            }
+            const onChange = (event) => {
+                setAmount(event.target.value);
+            };
+            return(
+            <div>
+                <h1>Converter</h1>
+                <div>
+                    <label htemlfor="minutes">Minutes</label>
+                    <input 
+                        value={inverted ? amount*60 : amount} 
+                        id="minutes" 
+                        placeholder="Minutes" 
+                        type="number"
+                        onChange={onChange}
+                        disabled={inverted}
+                        // input 태그에 onChange를 연결해야 하는 이유는,
+                        // 만약, onChange가 연결되어있지 않을 시
+                        // 설정한 useState의 첫 번째 요소가 0으로 고정되어 있기에
+                        // input이 키보드 입력 이벤트를 감지해도
+                        // 업데이트가 이루어지지 않는다.
+                    />
+                </div>
+                <div>
+                    <label htemlfor="hours">Hours</label>
+                    <input 
+                        // Math.round() -> 반올림
+                        value={inverted ? amount : Math.round(amount/60)} // 분을 60으로 나눈 값 -> 시간
+                        id="hours" 
+                        placeholder="Hours" 
+                        type="number"
+                        onChange={onChange}
+                        disabled={!inverted}
+                    />
+                </div>
+                <button onClick={onReset}>Reset</button>
+                <button onClick={onInverted}>{inverted ? "Turn back" : "Invert"}</button>
+            </div>
+            );
+        }
+        ReactDOM.render(<App/>, root);
+    </script>
+</html>
+
+<!--
+    삼항연산자
+    value ? true : false
+    value가 true면 true 실행
+    value가 false면 flase 실행
+-->
