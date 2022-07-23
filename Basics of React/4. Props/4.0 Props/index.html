@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- React 사용을 위한 import -->
+  <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+  <script
+    src="https://unpkg.com/react@17/umd/react.development.js"
+    crossorigin
+  ></script>
+  <script
+    src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    crossorigin
+  ></script>
+  <!-- Babel 사용을 위한 import -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- Babel 사용을 위한 Type 지정 -->
+  <!--
+        Props, 프로퍼티는 부모 컴포넌트에서 자식 컴포넌트로 데이터를 보내는 방법을 말한다.
+        즉, App 컴포넌트에서 자식 컴포넌트로 데이터를 보내는 방법
+
+        아래의 코드는 props를 이해하기 위한 코드이다.
+    -->
+  <script type="text/babel">
+    // shortcut 방법 -> 중괄호{}를 사용하여 원하는 요소만 가져오기 기능
+    // function Button({buttonText}){}
+    // 위와 같은 경우 props.buttonText가 아닌 buttonText로 바로 접근 가능
+    // function Button(props) {} 도 가능. {props.buttonText}
+    function Button({ buttonText, textFont }) {
+      // 매개변수의 이름은 자유 형식이다.
+      // props는 부모 컴포넌트에서 설정한 모든 Element를 가지고 있는 오브젝트
+      console.log(buttonText, textFont);
+      return (
+        <button
+          style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 10,
+            fontSize: textFont ? 18 : 16,
+          }}
+        >
+          {buttonText /*Button으로 넘어온 props 갑 가져오기*/}
+        </button>
+      );
+    }
+    function App() {
+      return (
+        <div>
+          {/*아래와 같이 컴포넌트에 buttonText라는 요소를 지정하면 Button 함수의 첫 번째 요소로 들어간다.(props)*/}
+          <Button buttonText="Save Changes" textFont={true} />
+          <Button buttonText="Continue" textFont={false} />
+        </div>
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
