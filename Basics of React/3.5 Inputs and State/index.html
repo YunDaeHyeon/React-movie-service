@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div id="root"></div>
+</body>
+    <!-- React 사용을 위한 import -->
+    <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <!-- Babel 사용을 위한 import -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Babel 사용을 위한 Type 지정 -->
+
+    <!-- 시간 -> 분 변환기 -->
+    <script type="text/babel">
+        const root = document.getElementById("root");
+        function App(){
+            const [minutes, setMinutes] = React.useState();
+            // event.target.value
+            const onChange = (event) => { // React에서도 JS와 같이 이벤트 인자를 가져올 수 있음
+                setMinutes(event.target.value); // setMinutes에 onChange로 가져온 value 지정
+            };
+            return(
+            <div>
+                <h1>Converter</h1>
+                <label htemlfor="minutes">Minutes</label>
+                <input 
+                    values={minutes} 
+                    id="minutes" 
+                    placeholder="Minutes" 
+                    type="number"
+                    onChange={onChange}
+                    // 사용자가 다른 값을 입력할 때 마다 state를 갱신하기 위해 onChage 사용
+                />
+                <h4>You want to converter {minutes}</h4>
+                <label htemlfor="hours">Hours</label>
+                <input id="hours" placeholder="Hours" type="number"/>
+            </div>
+            // HTML에서 input 옆에 텍스트를 설정하는 태그는 label
+            // labe과 input을 연결하기 위해 id와 for을 일치시켜야함.
+            // 하지만, 이 방식은 HTML 방식이며 JSX에서는 다른 방식 사용
+            // for 키워드는 JS용어이다. JSX에서는 오류 발생 (class도 마찬가지)
+            // JSX에서 for 대신 htmlfor 사용.
+            // 사용자가 input의 values를 수정할 때 마다 state를 갱신시키고자 하면?
+            // onChange 리스너 사용
+            );
+        }
+        ReactDOM.render(<App/>, root);
+    </script>
+</html>
