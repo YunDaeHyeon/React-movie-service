@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE htmlFor>
 <html lang="en">
 <body>
     <div id="root"></div>
@@ -29,7 +29,7 @@
             return(
             <div>
                 <div>
-                    <label html="minutes">Minutes</label>
+                    <label htmlFor="minutes">Minutes</label>
                     <input 
                         value={inverted ? amount*60 : amount} 
                         id="minutes" 
@@ -40,7 +40,7 @@
                     />
                 </div>
                 <div>
-                    <label html="hours">Hours</label>
+                    <label htmlFor="hours">Hours</label>
                     <input
                         value={inverted ? amount : Math.round(amount/60)}
                         id="hours" 
@@ -57,7 +57,7 @@
         }
         function KmToMiles(){
             return(
-                <<3>Km to Miles</h3>>
+                <h3>Km to Miles</h3>
             );
         }
         function App(){
