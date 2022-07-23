@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- React 사용을 위한 import -->
+  <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+  <script
+    src="https://unpkg.com/react@17/umd/react.development.js"
+    crossorigin
+  ></script>
+  <script
+    src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    crossorigin
+  ></script>
+  <!-- Babel 사용을 위한 import -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- Babel 사용을 위한 Type 지정 -->
+  <script type="text/babel">
+    function Button({ buttonText, onClick }) {
+      console.log(buttonText, "was rendered");
+      return (
+        <button
+          onClick={onClick}
+          style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 10,
+          }}
+        >
+          {buttonText}
+        </button>
+      );
+    }
+    /*
+      현재 코드는 부모 컴포넌트가 State를 관리한다.
+      부모의 props를 가져간 자식 컴포넌트에서 state가 변경될 시 부모 컴포넌트 전체가 리 렌더링이 된다.
+      이러한 경우 바꾸지 않아도 되는 컴포넌트까지 리 렌러딩이 수행되어 효율성이 떨어진다.
+      이를 해결하기 위해 React Memo(Memorize)를 할 수 있다.
+      ! 사용법 : 변수 = React.memo(컴포넌트 이름);
+      ! 꼭 해야하는 것은 아니며 기억하면 좋은 함수.
+    */
+
+    // 변경된 컴포넌트만 리렌더링 시키기 위해 memo 사용
+    const MemorizedButton = React.memo(Button);
+    function App() {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => setValue("Revert Changes");
+      return (
+        <div>
+          {/*아래의 onClick은 이벤트 리스너가 아닌, 하나의 props 이름이다.
+            또한, 모든 컴포넌트가 리렌더링 된다.
+          */}
+          <Button buttonText={value} onClick={changeValue} />
+          <Button buttonText="Continue" />
+          {/*아래의 방법은 React.memo()를 사용하는 방법으로서, 부모 컴포넌트에서 state가
+          변경된 컴포넌트만 리 렌더링 시키는 방법이다.*/}
+          <MemorizedButton buttonText={value} onClick={changeValue} />
+          <MemorizedButton buttonText="Continue" />
+        </div>
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
